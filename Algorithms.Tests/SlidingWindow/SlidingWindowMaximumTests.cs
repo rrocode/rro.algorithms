@@ -22,4 +22,12 @@ public class SlidingWindowMaximumTests
         var sut = new NaiveSlidingWindowMaximum();
         Assert.Equal(expected, sut.MaxSlidingWindow(nums, k));
     }
+
+    [Theory]
+    [MemberData(nameof(TestCases))]
+    public void Optimal_ReturnsCorrectMaximums(int[] nums, int k, int[] expected)
+    {
+        var sut = new OptimalSlidingWindowMaximum();
+        Assert.Equal(expected, sut.MaxSlidingWindow(nums, k));
+    }
 }
