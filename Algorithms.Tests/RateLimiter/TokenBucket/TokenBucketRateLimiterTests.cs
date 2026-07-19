@@ -32,7 +32,7 @@ public class TokenBucketRateLimiterTests
 
         var exception2 = Assert.Throws<ArgumentOutOfRangeException>(() => sut.TryConsume(-1));
 
-        Assert.Equal("tokens", exception.ParamName);
+        Assert.Equal("tokens", exception2.ParamName);
     }
 
     [Fact]

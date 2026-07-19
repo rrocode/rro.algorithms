@@ -23,11 +23,31 @@ public class SlidingWindowMaximumTests
         Assert.Equal(expected, sut.MaxSlidingWindow(nums, k));
     }
 
+    [Fact]
+    public void Naive_Throws_WhenSlidingWindowSizeIsLessThanOne()
+    {
+        var sut = new NaiveSlidingWindowMaximum();
+
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => sut.MaxSlidingWindow([1, 2, 3], -1));
+
+        Assert.Equal("k", exception.ParamName);
+    }
+
     [Theory]
     [MemberData(nameof(TestCases))]
     public void Optimal_ReturnsCorrectMaximums(int[] nums, int k, int[] expected)
     {
         var sut = new OptimalSlidingWindowMaximum();
         Assert.Equal(expected, sut.MaxSlidingWindow(nums, k));
+    }
+
+    [Fact]
+    public void Optimal_Throws_WhenSlidingWindowSizeIsLessThanOne()
+    {
+        var sut = new OptimalSlidingWindowMaximum();
+
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => sut.MaxSlidingWindow([1, 2, 3], -1));
+
+        Assert.Equal("k", exception.ParamName);
     }
 }

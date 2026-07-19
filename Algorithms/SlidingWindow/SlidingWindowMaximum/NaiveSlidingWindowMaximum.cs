@@ -4,6 +4,11 @@ public class NaiveSlidingWindowMaximum : ISlidingWindowMaximum
 {
     public int[] MaxSlidingWindow(int[] nums, int k)
     {
+        if (k < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(k), "sliding window size must be greater than 0.");
+        }
+
         if (nums.Length < k || k == 1)
         {
             return nums;
