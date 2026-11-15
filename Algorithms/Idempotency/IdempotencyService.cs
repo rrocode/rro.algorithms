@@ -1,6 +1,8 @@
 using System.Security.Cryptography;
 using System.Text.Json.Serialization;
 
+namespace Algorithms.Idempotency;
+
 public class IdempotencyService<TResponse> where TResponse: class
 {
     private Dictionary<string, IdempotencyRecord<TResponse>> _idempotencyCacheMap = new();
