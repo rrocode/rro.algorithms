@@ -10,11 +10,14 @@ public static class Converters
         return System.Security.Cryptography.SHA256.HashData(bytes);
     }
 
-    public static byte[] ComputeRequestHash<TRequest>(TRequest request) where TRequest: class
+    public static byte[] ComputeHashInBytes<TRequest>(TRequest request) where TRequest: class
     {
         byte[] utf8Json = JsonSerializer.SerializeToUtf8Bytes(request);
-        byte[] hashBytes = System.Security.Cryptography.SHA256.HashData(utf8Json);
+        return System.Security.Cryptography.SHA256.HashData(utf8Json);
+    }
 
-        return hashBytes;
+    public static string ComputeHash<TRequest>(TRequest request) where TRequest: class
+    {
+        return Encoding.UTF8.GetString(Converters.ComputeHashInBytes(request));
     }
 }
