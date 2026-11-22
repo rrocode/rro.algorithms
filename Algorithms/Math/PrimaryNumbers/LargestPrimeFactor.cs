@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using Microsoft.VisualBasic;
 
 namespace Algorithms.Math.LargestPrimeNumbers;
 
@@ -29,7 +31,6 @@ public class LargestPrimeNumbers
         }
         
         int largestPrimeNumberFactor = nextLargestPrimenumberFactor; // base
-        long primeNumberBackup = primeNumber;
         while ( primeNumber % largestPrimeNumberFactor == 0 )
         {
             primeNumber /= largestPrimeNumberFactor;

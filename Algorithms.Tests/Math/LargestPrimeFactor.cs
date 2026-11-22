@@ -1,5 +1,6 @@
 namespace Algorithms.Tests.Math.LargestPrimeFactor;
 
+using System.Diagnostics;
 using Algorithms.Math.LargestPrimeNumbers;
 
 public class LargestPrimeFactorTests
@@ -33,6 +34,17 @@ public class LargestPrimeFactorTests
 
     [Fact]
     public void Assert_ProjectEuler3()
+    {
+        var sut = new LargestPrimeNumbers();
+        
+        Stopwatch timer = Stopwatch.StartNew();
+        long largestPrimeFactor = sut.CalculateFrom(600851475143);
+        Console.WriteLine($" Elapsed: {timer.Elapsed} ms");
+        Assert.Equal(6857, largestPrimeFactor);
+    }
+
+    [Fact]
+    public void Assert_ProjectEuler3_6857()
     {
         var sut = new LargestPrimeNumbers();
 
