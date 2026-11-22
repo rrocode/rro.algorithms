@@ -34,21 +34,63 @@ public class IdempotencyServiceTests
             InvoiceNumber = $"{DateTime.Today}-EUR-11c98"
         };
 
-        Func<TestResponse> action = () => {
-            Task.Delay(3000);
+        
+
+        try
+        {
+            var response = sut.ProcessRequest<TestRequest>("KEY-1", req, this.getActionByType(true));
+            Assert.True(response.Success == true);
+            Assert.True(response.Id == 1);
+        } catch (IdempotencyException iex)
+        {
+        }
+    }
+
+    [Fact]
+    public void Assert_AddNewIdempotencyRecordWithExceptionWhenCallFails()
+    {
+        var sut = new IdempotencyService<TestResponse>();
+
+        var req = new TestRequest
+        {
+            IdempotencyKey = "KEY-2",
+            PaymentAmount = 11.98,
+            Currency = "EUR",
+            ValueDate = DateTime.Today,
+            InvoiceNumber = $"{DateTime.Today}-EUR-11c98"
+        };
+
+        
+
+        try
+        {
+            var response = sut.ProcessRequest<TestRequest>("KEY-1", req, this.getActionByType(false));
+            Assert.True(response.Success == false);
+            Assert.True(response.Id == 1);
+        } catch (IdempotencyException iex)
+        {
+        }
+    }
+
+    private Func<TestResponse> getActionByType(bool success)
+    {
+
+        Func<TestResponse> actionSuccess = () => {
+            Task.Delay(1000);
             return new TestResponse {
                 Id = 1,
                 Success = true
             };
         };
 
-        try
-        {
-            var response = sut.ProcessRequest<TestRequest>("KEY-1", req, action);
-            Assert.True(response.Success == true);
-            Assert.True(response.Id == 1);
-        } catch (IdempotencyException iex)
-        {
-        }
+        Func<TestResponse> actionError = () => {
+            Task.Delay(3000);
+            return new TestResponse {
+                Id = 1,
+                Success = false
+            };
+        };
+
+        return success ? actionSuccess : actionError;
     }
 }
