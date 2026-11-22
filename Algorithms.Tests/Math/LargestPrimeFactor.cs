@@ -37,6 +37,6 @@ public class LargestPrimeFactorTests
         var sut = new LargestPrimeNumbers();
 
         long largestPrimeFactor = sut.CalculateFrom(600851475143);
-        Assert.Equal(600851475143, largestPrimeFactor);
+        Assert.Equal(6857, largestPrimeFactor);
     }
 }

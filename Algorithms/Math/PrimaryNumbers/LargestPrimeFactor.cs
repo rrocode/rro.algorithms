@@ -15,7 +15,7 @@ public class LargestPrimeNumbers
             return nextLargestPrimenumberFactor;
         }
 
-        if (counter > 1000)
+        if (counter > 10000)
         {
             throw new InvalidOperationException("Too many attempts");
         }
@@ -34,7 +34,7 @@ public class LargestPrimeNumbers
         if (primeNumber > largestPrimeNumberFactor)
         {
             largestPrimeNumberFactor = largestPrimeNumberFactor + 2;
-            largestPrimeNumberFactor = CalculateFrom(primeNumberBackup, largestPrimeNumberFactor);
+            largestPrimeNumberFactor = CalculateFrom(primeNumber, largestPrimeNumberFactor);
         }
 
         return largestPrimeNumberFactor;
