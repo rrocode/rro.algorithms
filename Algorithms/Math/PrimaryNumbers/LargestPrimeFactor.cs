@@ -43,7 +43,7 @@ public class LargestPrimeNumbers
         if (primeNumber > largestPrimeNumberFactor)
         {
             largestPrimeNumberFactor = largestPrimeNumberFactor + 2;
-            largestPrimeNumberFactor = CalculateFrom(primeNumber, largestPrimeNumberFactor);
+            largestPrimeNumberFactor = CalculateFrom(primeNumber, largestPrimeNumberFactor, print, maxAttempts);
         }
 
         return largestPrimeNumberFactor;
