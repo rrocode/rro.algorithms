@@ -1,9 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Algorithms.Math.LargestPrimeNumbers;
 
 public class LargestPrimeNumbers
 {
     int counter = 0;
-    public int CalculateFrom(long primeNumber, int nextLargestPrimenumberFactor = 3)
+    public int CalculateFrom(long primeNumber, int nextLargestPrimenumberFactor = 3, bool print = false, int maxAttempts = 10000)
     {
         if (primeNumber <= 2)
         {
@@ -15,20 +17,26 @@ public class LargestPrimeNumbers
             return nextLargestPrimenumberFactor;
         }
 
-        if (counter > 10000)
+        if (counter > maxAttempts)
         {
             throw new InvalidOperationException("Too many attempts");
         }
 
-        Console.WriteLine($"Iteration: {++counter}");
-        Console.WriteLine($"Prime Number: {primeNumber}; LargestPrimeNumberFactor: {nextLargestPrimenumberFactor}");
+        if (print)
+        {
+            Console.WriteLine($"Iteration: {++counter}");
+            Console.WriteLine($"Prime Number: {primeNumber}; LargestPrimeNumberFactor: {nextLargestPrimenumberFactor}");   
+        }
         
         int largestPrimeNumberFactor = nextLargestPrimenumberFactor; // base
         long primeNumberBackup = primeNumber;
         while ( primeNumber % largestPrimeNumberFactor == 0 )
         {
             primeNumber /= largestPrimeNumberFactor;
-            Console.WriteLine($"New PrimeNumber: {primeNumber}, LargestPrimeNumber: {largestPrimeNumberFactor}");
+            if (print)
+            {
+                Console.WriteLine($"New PrimeNumber: {primeNumber}, LargestPrimeNumber: {largestPrimeNumberFactor}");   
+            }            
         }
 
         if (primeNumber > largestPrimeNumberFactor)
